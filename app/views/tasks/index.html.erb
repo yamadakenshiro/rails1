@@ -1,0 +1,56 @@
+<head>
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<%= render "shared/partial" %>
+
+<body>
+    <% flash.each do |message_type, message| %>
+      <%= message %>
+    <% end %>
+
+<h3>予定一覧</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>タイトル</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>終日</th>
+      <th>更新日時</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.id %></td>
+        <td><%= task.title %></td>
+        <td><%= task.start_date %></td>
+        <td><%= task.end_date %></td>
+        <td><%= task.is_all_day %></td>
+        <td><%= task.updated_at %></td>
+        <td><%= link_to "詳細", task_path(task) %></td>
+        <td><%= link_to "編集", edit_task_path(task) %></td>
+        <td>
+          <input type="button" id="btn" value='削除'>
+            <div id="modal" class="modal">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <h1>削除</h1>
+                  <input type="button" id="closeBtn" value="close">
+                </div>
+              </div>
+            </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to "予定の新規登録", :new_task %></p>
