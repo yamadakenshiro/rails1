@@ -1,7 +1,5 @@
 <%= render "shared/partial" %>
 
-<%= link_to "一覧に戻る", :tasks %>
-
 <%= @task.title %>
 <%= form_with model: @task do |f| %>
   <table>
@@ -27,3 +25,5 @@
   </table>
 
 <% end %>
+
+<%= link_to "一覧に戻る", :tasks %>

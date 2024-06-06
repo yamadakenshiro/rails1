@@ -20,15 +20,11 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-var btn = document.getElementById('btn');
-var modal = document.getElementById('modal');
-
-btn.addEventListener('click', function() {
-  modal.style.display = 'block';
-})
-
-var closeBtn = document.getElementById('closeBtn');
-
-closeBtn.addEventListener('click', function() {
-  modal.style.display = 'none';
+document.addEventListener('DOMContentLoaded', function(){
+  $('.open').click(function(){
+      $('.modal').fadeIn();
+  });
+  $('.close').click(function(){
+      $('.modal').fadeOut();
+  });
 })

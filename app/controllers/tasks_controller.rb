@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
+    @schedule_total = Task.all.count
   end
 
   def new
