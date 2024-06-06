@@ -1,0 +1,61 @@
+<head>
+<script type="packs/javascript" src="application.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<%= render "shared/partial" %>
+
+<body>
+  <% flash.each do |message_type, message| %>
+      <%= message %>
+  <% end %>
+
+  <h3>予定一覧</h3>
+
+  <table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>タイトル</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>終日</th>
+      <th>更新日時</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+<tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.id %></td>
+        <td><%= task.title %></td>
+        <td><%= task.start_date %></td>
+        <td><%= task.end_date %></td>
+        <td><% if task.is_all_day == true %>○
+            <% else %>
+            <% end %>
+        </td>
+        <td><%= task.updated_at.to_s(:datetime_jp) %></td>
+        <td><%= link_to "詳細", task_path(task) %></td>
+        <td><%= link_to "編集", edit_task_path(task) %></td>
+        <td>
+        <button class="open">削除</button>
+        <div class="modal">
+          <p>本当に削除しますか？</p>
+          <button><%= link_to '削除', task, method: :delete %></button>
+          <div class="close">閉じる</div>
+        </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p> 予定の合計 <%= @schedule_total %></p>
+
+<p> 本日の日付 <%= Time.now.strftime("%Y/%m/%d")%></p>
+
+<p><%= link_to "予定の新規登録", :new_task %></p>
